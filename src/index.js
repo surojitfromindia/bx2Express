@@ -19,7 +19,7 @@ dotenv.config();
       `mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbOne`,
       {
         useNewUrlParser: true,
-        useUnifiedTopology: true
+        useUnifiedTopology: true,
       }
     )
     .then(() => {
@@ -32,7 +32,7 @@ dotenv.config();
   app.use("/user", UserRouter);
   app.use("/price", PriceRouter);
 
-  app.listen(3000, () => {
+  app.listen(process.env.PORT || 5000, () => {
     console.log("Up and running");
   });
 })();
