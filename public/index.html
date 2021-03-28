@@ -1,0 +1,68 @@
+<html>
+  <script>
+    window.onload = () => {
+      //login button
+      document
+        .querySelector("#btnSubmit")
+        .addEventListener("click", async (e) => {
+          fetch("/user/login", {
+            method: "post",
+            body: JSON.stringify({
+              email: document.querySelector("#email").value,
+              password: document.querySelector("#password").value
+            }),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json"
+            }
+          })
+            .then((res) => res.json())
+            .then((jsondata) => {
+              localStorage.setItem("Atoken", jsondata.token);
+            });
+        });
+      //gte
+      document.querySelector("#btnU").addEventListener("click", async (e) => {
+        fetch("/user/getuser", {
+          method: "get",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("Atoken")
+          }
+        })
+          .then((res) => res.json())
+          .then((jsondata) => {
+            document.querySelector("#pid").innerHTML += jsondata.message;
+          });
+      });
+    };
+  </script>
+
+  <body>
+    <form>
+      <div>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          placeholder="Email"
+        />
+        <br />
+        <input
+          id="password"
+          type="text"
+          name="password"
+          required
+          placeholder="Enter password"
+        />
+        <input id="btnSubmit" type="button" value="Login" />
+      </div>
+      <div>
+        <input type="button" value="getuser" id="btnU" />
+        <p id="pid"></p>
+      </div>
+    </form>
+  </body>
+</html>
