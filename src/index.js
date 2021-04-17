@@ -17,7 +17,7 @@ const app = express();
 
   //mongoose connect
   await mongoose
-    .connect(`mongodb://localhost:27017/productionDbOne`, {
+    .connect(`mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbOne`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
