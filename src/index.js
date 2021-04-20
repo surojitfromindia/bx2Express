@@ -1,4 +1,5 @@
 const dotenv = require("dotenv");
+dotenv.config();
 const express = require("express");
 const mongoose = require("mongoose");
 const { UserRouter } = require("./routes/User");
@@ -6,7 +7,6 @@ const { PriceRouter } = require("./routes/Price");
 const { BillRouter } = require("./routes/Bill");
 const { JWTAuthM } = require("./controllers/auth");
 const cors = require("cors");
-dotenv.config();
 const app = express();
 
 //middlewares
@@ -17,7 +17,7 @@ const app = express();
 
   //mongoose connect
   await mongoose
-    .connect(`mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbOne`, {
+    .connect(`mongodb://127.0.0.1:27017/productionDbOne`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
@@ -32,7 +32,7 @@ const app = express();
   });
   app.use("/user", UserRouter);
   app.use("/price", JWTAuthM, PriceRouter);
-  app.use("/bill", JWTAuthM, BillRouter);
+  app.use("/bill", BillRouter);
 
   app.listen(process.env.PORT || 5000, () => {
     console.log("Up and running");

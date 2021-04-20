@@ -10,7 +10,7 @@ router.post("/login", async (req, res) => {
   login(req, res);
 });
 
-router.get("/getuser", JWTAuthM, (req, res) => {
+router.get("/getuser", (req, res) => {
   res.send({ message: "Got it" });
 });
 

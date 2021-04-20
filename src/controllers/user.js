@@ -45,7 +45,7 @@ const login = async (req, res) => {
           if (result) {
             const accessToken = jwt.sign(
               userPayload,
-              "xhbaehbtfq4vvdgjxljsixkg5lvp1one"
+              `"${process.env.SKEY}"`
             );
             console.log({ accessToken });
 

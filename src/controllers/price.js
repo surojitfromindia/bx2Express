@@ -2,8 +2,8 @@ const { GoldPrice, SilverPrice } = require("../model/Price");
 
 const goldPriceAll = async () => {
   //return a array
-  let res = await GoldPrice.find({}).sort({ day: -1 });
-  return res;
+  let res = await GoldPrice.find({});
+  return res.reverse();
 };
 
 const goldPriceOne = async (qDate) => {
@@ -14,8 +14,8 @@ const goldPriceOne = async (qDate) => {
 
 const silverPriceAll = async () => {
   //return a array
-  let res = await SilverPrice.find({}).sort({ day: -1 });
-  return res;
+  let res = await SilverPrice.find({});
+  return res.reverse();
 };
 
 const silverPriceOne = async (qDate) => {
@@ -27,5 +27,5 @@ module.exports = {
   goldPriceOne,
   goldPriceAll,
   silverPriceAll,
-  silverPriceOne
+  silverPriceOne,
 };
