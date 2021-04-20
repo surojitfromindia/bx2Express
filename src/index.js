@@ -17,10 +17,13 @@ const app = express();
 
   //mongoose connect
   await mongoose
-    .connect(`mongodb://127.0.0.1:27017/productionDbOne`, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    .connect(
+      `mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbOne`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    )
     .then(() => {
       console.log("Connected to database");
     })
