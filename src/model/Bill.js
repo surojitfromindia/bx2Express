@@ -5,11 +5,11 @@ const BillSchema = new mongoose.Schema({
   customer_name: { type: String, required: true },
   customer_contact: { type: String, required: false },
   item_details: {
-    name: { type: String, required: true },
+    name: { type: String },
     type: { type: String, required: true },
     price_pg: { type: Number, required: true },
-    quantity: { type: Number, required: true },
-    unit: { type: String, required: true },
+    quantity: { type: Number, required: true, default: 0 },
+    unit: { type: String, required: true, default: " " },
   },
   deposite: {
     quantity: { type: Number },
@@ -34,6 +34,7 @@ const BillSchema = new mongoose.Schema({
     },
     remain: { type: Number },
     status: { type: String },
+    last_pay_date: { type: Date },
   },
 });
 
@@ -44,7 +45,8 @@ BillSchema.pre("save", function (next) {
     0
   );
   this.payment.remain = this.payment.tp - this.payment.paidU;
-  this.payment.status = this.payment.remain <= 5 ? "paid" : "unpaid";
+  this.payment.status = this.payment.remain <= 10 ? "paid" : "unpaid";
+  this.payment.last_pay_date = Date.now;
   next();
 });
 
