@@ -38,7 +38,7 @@ const login = async (req, res) => {
     async (err, user) => {
       if (!err) {
         if (user) {
-          const result = await bcrypt.compareSync(
+          const result = await bcrypt.compare(
             userPayload.password,
             user.password
           );

@@ -8,6 +8,25 @@ function createNewBill(req, res) {
   });
 }
 
+async function getMiniAllDetails(req, res) {
+  try {
+    let bills = await Bill.find(
+      {},
+      {
+        customer_name: 1,
+        customer_contact: 1,
+        bill_date: 1,
+        item_details: 1,
+        "deposite.quantity": 1,
+        payment: 1,
+      }
+    ).sort({ bill_date: -1 });
+    res.send(bills);
+  } catch (err) {
+    res.status(404).send(err);
+  }
+}
+
 async function updateBill(req, res) {
   let billId = req.params.billid;
   let body = req.body;
@@ -28,4 +47,5 @@ async function updateBill(req, res) {
 module.exports = {
   createNewBill,
   updateBill,
+  getMiniAllDetails,
 };
