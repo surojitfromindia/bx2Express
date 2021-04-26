@@ -46,7 +46,7 @@ BillSchema.pre("save", function (next) {
   );
   this.payment.remain = this.payment.tp - this.payment.paidU;
   this.payment.status = this.payment.remain <= 10 ? "paid" : "unpaid";
-  this.payment.last_pay_date = Date.now;
+  this.payment.last_pay_date = Date.now();
   next();
 });
 

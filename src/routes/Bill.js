@@ -4,10 +4,11 @@ const {
   createNewBill,
   updateBill,
   getMiniAllDetails,
+  getBillById,
 } = require("../controllers/bill");
 
 router.get("/:billnumber", (req, res) => {
-  res.send("Bills");
+  getBillById(req, res);
 });
 
 router.post("/new", (req, res) => {
