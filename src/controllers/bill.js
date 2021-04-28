@@ -29,15 +29,16 @@ async function getMiniAllDetails(req, res) {
 
 async function getBillById(req, res) {
   try {
-    let bills = await Bill.findOne({ _id: req.params.billnumber });
-    res.send(bills);
+    let bills = await Bill.findOne({ _id: req.params.id });
+    if (bills) res.send(bills);
+    else res.sendStatus(404);
   } catch (err) {
     res.status(404).send(err);
   }
 }
 
 async function updateBill(req, res) {
-  let billId = req.params.billid;
+  let billId = req.params.id;
   let body = req.body;
 
   try {
@@ -51,14 +52,20 @@ async function updateBill(req, res) {
     //return the bill
     res.send(updatedBill);
   } catch (err) {
-    console.log(err);
     res.status(404).send(err);
   }
 }
 
+async function deleteBillById(req, res) {
+  let id = req.params.id;
+  Bill.deleteOne({ _id: id }).then((deB) => {
+    res.send(deB.deletedCount === 1 ? true : false);
+  });
+}
 module.exports = {
   createNewBill,
   updateBill,
   getMiniAllDetails,
   getBillById,
+  deleteBillById,
 };
