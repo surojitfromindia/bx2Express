@@ -5,17 +5,22 @@ const {
   updateBill,
   getMiniAllDetails,
   getBillById,
+  deleteBillById,
 } = require("../controllers/bill");
 
-router.get("/:billnumber", (req, res) => {
+router.get("/:id", (req, res) => {
   getBillById(req, res);
 });
 
 router.post("/new", (req, res) => {
   createNewBill(req, res);
 });
-router.put("/edit/:billid", (req, res) => {
+router.put("/edit/:id", (req, res) => {
   updateBill(req, res);
+});
+
+router.delete("/:id", (req, res) => {
+  deleteBillById(req, res);
 });
 
 router.get("/", (req, res) => {
