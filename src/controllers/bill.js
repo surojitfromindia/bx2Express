@@ -26,6 +26,24 @@ async function getMiniAllDetails(req, res) {
     res.status(404).send(err);
   }
 }
+async function getMiniAllDetailsByID(req, res) {
+  try {
+    let bill = await Bill.findOne(
+      { _id: req.params.id },
+      {
+        customer_name: 1,
+        customer_contact: 1,
+        bill_date: 1,
+        item_details: 1,
+        "deposite.quantity": 1,
+        payment: 1,
+      }
+    ).sort({ bill_date: -1 });
+    res.send(bill);
+  } catch (err) {
+    res.status(404).send(err);
+  }
+}
 
 async function getBillById(req, res) {
   try {
@@ -68,4 +86,5 @@ module.exports = {
   getMiniAllDetails,
   getBillById,
   deleteBillById,
+  getMiniAllDetailsByID,
 };
