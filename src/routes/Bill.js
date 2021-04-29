@@ -6,7 +6,12 @@ const {
   getMiniAllDetails,
   getBillById,
   deleteBillById,
+  getMiniAllDetailsByID,
 } = require("../controllers/bill");
+
+router.get("/mini/:id", (req, res) => {
+  getMiniAllDetailsByID(req, res);
+});
 
 router.get("/:id", (req, res) => {
   getBillById(req, res);
