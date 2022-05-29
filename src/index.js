@@ -18,7 +18,9 @@ const app = express();
   //mongoose connect
   await mongoose
     .connect(
-      `mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbOne`,
+//       `mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbOne`,
+        "mongodb+srv://user_shop:1l5B98yYNc2FQaWp@cluster0.3yu8q.mongodb.net/productionDbOne",
+
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
